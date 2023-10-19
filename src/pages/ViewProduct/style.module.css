@@ -1,0 +1,11 @@
+.container{
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  margin-top: 100px;
+  flex-wrap: wrap;
+}
+
+.image {
+  height: 100vh;
+}
