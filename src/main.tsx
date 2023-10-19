@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
 import { ChakraProvider } from "@chakra-ui/react";
 import ViewProduct from "./pages/ViewProduct";
-import EditProduct from "./pages/EditProduct";
 
 const router = createBrowserRouter([
   {
@@ -15,10 +14,6 @@ const router = createBrowserRouter([
   {
     path: "/product/:id",
     element: <ViewProduct  />,
-  },
-  {
-    path: "/edit-product/:id",
-    element: <EditProduct  />,
   },
   {
     path: "*",
