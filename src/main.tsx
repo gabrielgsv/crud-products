@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
 import { ChakraProvider } from "@chakra-ui/react";
 import ViewProduct from "./pages/ViewProduct";
+import ButtonTheme from "./components/ButtonTheme";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/product/:id",
-    element: <ViewProduct  />,
+    element: <ViewProduct />,
   },
   {
     path: "*",
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider>
+      <ButtonTheme />
       <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>

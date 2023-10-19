@@ -10,10 +10,9 @@ import {
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useEffect, useState } from "react";
 import packageAnimation from "../../assets/package-animation.json";
-import ButtonTheme from "../../components/ButtonTheme";
+import ActionButtons from "../../components/ActionButtons";
 import { Products, getProducts } from "./service";
 import style from "./style.module.css";
-import ActionButtons from "../../components/ActionButtons";
 export default function Home() {
   const [products, setProducts] = useState<Products[]>([]);
 
@@ -25,7 +24,6 @@ export default function Home() {
 
   return (
     <>
-      <ButtonTheme />
       <div className={style.container}>
         <Player autoplay src={packageAnimation} keepLastFrame />
         <TableContainer>
