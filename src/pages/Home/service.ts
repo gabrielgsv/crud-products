@@ -1,18 +1,5 @@
 import axios from "axios";
-
-export type Products = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-};
+import { Products } from "../../types/Products";
 
 export const getProducts = new Promise<Products[]>((resolve) => {
   axios
