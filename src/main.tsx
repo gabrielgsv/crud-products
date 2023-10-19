@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
+import { ChakraProvider } from "@chakra-ui/react";
+import ViewProduct from "./pages/ViewProduct";
+import EditProduct from "./pages/EditProduct";
 
 const router = createBrowserRouter([
   {
@@ -11,8 +13,12 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/product",
-    element: <h1>Product</h1>,
+    path: "/product/:id",
+    element: <ViewProduct  />,
+  },
+  {
+    path: "/edit-product/:id",
+    element: <EditProduct  />,
   },
   {
     path: "*",
@@ -22,6 +28,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ChakraProvider>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>
 );

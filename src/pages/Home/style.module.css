@@ -1,0 +1,10 @@
+.container{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.table {
+  margin-top: 50px;
+  max-width: 800px;
+}
