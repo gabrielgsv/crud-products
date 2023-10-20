@@ -6,6 +6,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Products from "./pages/Products";
 import ViewProduct from "./pages/Products/ViewProduct";
 import NavBar from "./components/NavBar";
+import EditProduct from "./pages/Products/EditProduct";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/product/:id",
     element: <ViewProduct />,
+  },
+  {
+    path: "/edit-product/:id",
+    element: <EditProduct />,
   },
   {
     path: "*",
