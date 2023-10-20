@@ -2,7 +2,7 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { useParams } from "react-router-dom";
 import style from "./style.module.css";
-import { ProductsType } from "../../../types/Products";
+import { ProductType } from "../context/ProductContext";
 import { useEffect, useState } from "react";
 import { GetProductById } from "./service";
 import { Image } from "@chakra-ui/image";
@@ -11,7 +11,7 @@ import { Text } from "@chakra-ui/layout";
 import { priceFormat } from "../../../services/priceFormat";
 
 export default function ViewProduct() {
-  const [product, setProduct] = useState<ProductsType>();
+  const [product, setProduct] = useState<ProductType>();
 
   const { id } = useParams();
 
