@@ -13,11 +13,11 @@ import {
 import { deleteProduct, getProducts } from "../../pages/Products/service";
 import { Link } from "react-router-dom";
 import { FiEye, FiXCircle, FiEdit } from "react-icons/fi";
-import { ProductsType } from "../../types/Products";
+import { ProductType } from "../../pages/Products/context/ProductContext";
 
 type PropsTypes = {
   id: number;
-  setProducts: React.Dispatch<React.SetStateAction<ProductsType[]>>;
+  setProducts: React.Dispatch<React.SetStateAction<ProductType[]>>;
 };
 export default function ActionButtons({ id, setProducts }: PropsTypes) {
   const { isOpen, onOpen, onClose } = useDisclosure();
