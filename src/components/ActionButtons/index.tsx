@@ -10,14 +10,14 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
-import { deleteProduct, getProducts } from "../../pages/Home/service";
+import { deleteProduct, getProducts } from "../../pages/Products/service";
 import { Link } from "react-router-dom";
-import { FiEye, FiXCircle } from "react-icons/fi";
-import { Products } from "../../types/Products";
+import { FiEye, FiXCircle, FiEdit } from "react-icons/fi";
+import { ProductsType } from "../../types/Products";
 
 type PropsTypes = {
   id: number;
-  setProducts: React.Dispatch<React.SetStateAction<Products[]>>;
+  setProducts: React.Dispatch<React.SetStateAction<ProductsType[]>>;
 };
 export default function ActionButtons({ id, setProducts }: PropsTypes) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -69,7 +69,12 @@ export default function ActionButtons({ id, setProducts }: PropsTypes) {
       <DeleteModal />
       <Link to={`/product/${id}`}>
         <Button m={2} colorScheme="blue" leftIcon={<FiEye />}>
-          Ver Dados / Alterar
+          Ver Dados
+        </Button>
+      </Link>
+      <Link to={`/edit-product/${id}`}>
+        <Button m={2} colorScheme="blue" leftIcon={<FiEdit />}>
+          Alterar
         </Button>
       </Link>
       <Button m={2} colorScheme="red" onClick={onOpen} leftIcon={<FiXCircle />}>
