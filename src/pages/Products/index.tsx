@@ -11,10 +11,11 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import { useEffect, useState } from "react";
 import packageAnimation from "../../assets/package-animation.json";
 import ActionButtons from "../../components/ActionButtons";
-import { Products, getProducts } from "./service";
+import { getProducts } from "./service";
 import style from "./style.module.css";
-export default function Home() {
-  const [products, setProducts] = useState<Products[]>([]);
+import { ProductsType } from "../../types/Products";
+export default function Products() {
+  const [products, setProducts] = useState<ProductsType[]>([]);
 
   useEffect(() => {
     getProducts.then((res) => {

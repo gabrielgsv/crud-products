@@ -1,24 +1,11 @@
 import axios from "axios";
+import { ProductsType } from "../../types/Products";
 
-export type Products = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-};
-
-export const getProducts = new Promise<Products[]>((resolve) => {
+export const getProducts = new Promise<ProductsType[]>((resolve) => {
   axios
     .get("https://dummyjson.com/products")
     .then((res) => {
-      const products: Products[] = res.data.products;
+      const products: ProductsType[] = res.data.products;
       resolve(products);
     })
     .catch((err) => {
