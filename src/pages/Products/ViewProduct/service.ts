@@ -1,12 +1,12 @@
 import axios from "axios";
-import { Products } from "../../types/Products";
+import { ProductsType } from "../../../types/Products";
 
 export function GetProductById(id: number) {
-  return new Promise<Products>((resolve) => {
+  return new Promise<ProductsType>((resolve) => {
     axios
       .get(`https://dummyjson.com/products/${id}`)
       .then((res) => {
-        const product: Products = res.data;
+        const product: ProductsType = res.data;
         resolve(product);
       })
       .catch((err) => {

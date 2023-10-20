@@ -13,9 +13,9 @@ import packageAnimation from "../../assets/package-animation.json";
 import ActionButtons from "../../components/ActionButtons";
 import { getProducts } from "./service";
 import style from "./style.module.css";
-import { Products } from "../../types/Products";
-export default function Home() {
-  const [products, setProducts] = useState<Products[]>([]);
+import { ProductsType } from "../../types/Products";
+export default function Products() {
+  const [products, setProducts] = useState<ProductsType[]>([]);
 
   useEffect(() => {
     getProducts.then((res) => {

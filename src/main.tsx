@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
 import { ChakraProvider } from "@chakra-ui/react";
-import ViewProduct from "./pages/ViewProduct";
+import Products from "./pages/Products";
+import ViewProduct from "./pages/Products/ViewProduct";
 import NavBar from "./components/NavBar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Products />,
   },
   {
     path: "/product/:id",

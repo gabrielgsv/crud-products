@@ -2,15 +2,16 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { useParams } from "react-router-dom";
 import style from "./style.module.css";
-import { Products } from "../../types/Products";
+import { ProductsType } from "../../../types/Products";
 import { useEffect, useState } from "react";
 import { GetProductById } from "./service";
 import { Image } from "@chakra-ui/image";
 import { Card, CardBody, CardHeader } from "@chakra-ui/card";
 import { Text } from "@chakra-ui/layout";
+import { priceFormat } from "../../../services/priceFormat";
 
 export default function ViewProduct() {
-  const [product, setProduct] = useState<Products>();
+  const [product, setProduct] = useState<ProductsType>();
 
   const { id } = useParams();
 
@@ -20,15 +21,9 @@ export default function ViewProduct() {
     });
   }, []);
 
-  const priceFormat = (price: number) => {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(price);
-  };
-
   return (
     <>
+      <Text className={style.title}>Visualizar Produto</Text>
       <FormControl padding="0 100px">
         <div className={style.container}>
           <div>
@@ -59,6 +54,11 @@ export default function ViewProduct() {
               value={product?.price && priceFormat(product.price)}
               isReadOnly
             />
+          </div>
+
+          <div>
+            <FormLabel>Porcentagem de desconto</FormLabel>
+            <Input w={300} type="text" value={product?.discountPercentage} isReadOnly />
           </div>
 
           <div>
