@@ -1,10 +1,10 @@
-import axios from "axios";
+import api from "../../../services/api";
 import { ProductType } from "../context/ProductContext";
 
 export function GetProductById(id: number) {
   return new Promise<ProductType>((resolve) => {
-    axios
-      .get(`https://dummyjson.com/products/${id}`)
+    api
+      .get(`/products/${id}`)
       .then((res) => {
         const product: ProductType = res.data;
         resolve(product);
