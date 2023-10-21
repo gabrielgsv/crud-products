@@ -1,4 +1,11 @@
-import { Button, Card, CardBody, CardHeader, Image, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import { FiPlus, FiXCircle } from "react-icons/fi";
 import emptyImage from "../../../../assets/empty-image.svg";
 import { ProductType, useProduct } from "../../context/ProductContext";
@@ -16,15 +23,18 @@ export default function ImagesForm() {
       const reader = new FileReader();
       reader.onloadend = () => {
         if (multiple) {
-          setProduct({
-            ...product,
-            images: [...product.images, reader.result as string],
-          } as ProductType);
+          setProduct(
+            (prevProduct) =>
+              ({
+                ...prevProduct,
+                images: [...product.images, reader.result as string],
+              } as ProductType)
+          );
         } else {
-          setProduct({
-            ...product,
+          setProduct((prevProduct) => ({
+            ...prevProduct,
             [e.target.name]: reader.result as string,
-          } as ProductType);
+          } as ProductType));
         }
       };
       reader.readAsDataURL(file);
@@ -38,8 +48,9 @@ export default function ImagesForm() {
         </CardHeader>
         <CardBody display="flex" flexDirection="column" alignItems="center">
           <Image
-            src={product?.thumbnail ?? emptyImage}
+            src={product?.thumbnail}
             alt={product?.title}
+            fallbackSrc={emptyImage}
             width={300}
             height="auto"
           />
@@ -69,6 +80,7 @@ export default function ImagesForm() {
                 src={image}
                 alt={product?.title}
                 className={style.images}
+                fallbackSrc={emptyImage}
               />
               <Button
                 colorScheme="gray"
