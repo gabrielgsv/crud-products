@@ -6,7 +6,7 @@ import { Button, Skeleton, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
-import { useProduct } from "../context/ProductContext";
+import { DEFAULT_VALUE, useProduct } from "../context/ProductContext";
 import { GetProductById, editProduct } from "./service";
 import style from "../style.module.css";
 import ImagesForm from "../components/ImagesForm";
@@ -27,6 +27,8 @@ export default function EditProduct() {
         setLoading(false);
       }, 700);
     });
+
+    setProduct(DEFAULT_VALUE.product);
   }, []);
 
   return (
