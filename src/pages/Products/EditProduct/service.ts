@@ -15,22 +15,8 @@ export function GetProductById(id: number) {
   });
 }
 
-export function GetCategories() {
-  return new Promise<string[]>((resolve) => {
-    api
-      .get(`/products/categories`)
-      .then((res) => {
-        const categories: string[] = res.data;
-        resolve(categories);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
-}
-
 export function editProduct(product: ProductType) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     api
       .put(`/products/${product.id}`, { ...product, id: undefined })
       .then((res) => {
@@ -38,6 +24,7 @@ export function editProduct(product: ProductType) {
       })
       .catch((err) => {
         console.error(err);
+        reject();
       });
   });
 }

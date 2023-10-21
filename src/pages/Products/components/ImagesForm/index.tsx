@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { FiPlus, FiXCircle } from "react-icons/fi";
 import emptyImage from "../../../../assets/empty-image.svg";
-import { ProductType, useProduct } from "../../context/ProductContext";
+import { useProduct } from "../../context/ProductContext";
 import style from "./style.module.css";
 
 export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
@@ -22,22 +22,17 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
+        const imageUrl = URL.createObjectURL(file);
         if (multiple) {
-          setProduct(
-            (prevProduct) =>
-              ({
-                ...prevProduct,
-                images: [...product.images, reader.result as string],
-              } as ProductType)
-          );
+          setProduct((prevProduct) => ({
+            ...prevProduct,
+            images: [...product.images, imageUrl],
+          }));
         } else {
-          setProduct(
-            (prevProduct) =>
-              ({
-                ...prevProduct,
-                [e.target.name]: reader.result as string,
-              } as ProductType)
-          );
+          setProduct((prevProduct) => ({
+            ...prevProduct,
+            [e.target.name]: imageUrl,
+          }));
         }
       };
       reader.readAsDataURL(file);

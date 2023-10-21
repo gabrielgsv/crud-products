@@ -2,32 +2,22 @@
 import { Card } from "@chakra-ui/card";
 import { FormControl } from "@chakra-ui/form-control";
 import { Text } from "@chakra-ui/layout";
-import { Button, Skeleton, useToast } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Button, useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import Form from "../components/Form";
-import { DEFAULT_VALUE, useProduct } from "../context/ProductContext";
-import { GetProductById, editProduct } from "./service";
-import style from "../style.module.css";
 import ImagesForm from "../components/ImagesForm";
+import { DEFAULT_VALUE, useProduct } from "../context/ProductContext";
+import style from "../style.module.css";
+import { saveProduct } from "./service";
+import { useEffect } from "react";
 
-export default function EditProduct() {
+export default function CreateProduct() {
   const { product, setProduct } = useProduct();
-  const [loading, setLoading] = useState(false);
 
-  const { id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
-    GetProductById(Number(id)).then((res) => {
-      setProduct(res);
-      setTimeout(() => {
-        setLoading(false);
-      }, 700);
-    });
-
     setProduct(DEFAULT_VALUE.product);
   }, []);
 
@@ -43,18 +33,8 @@ export default function EditProduct() {
       >
         <Text className={style.title}>Editar Produto</Text>
         <FormControl padding="0 100px">
-          {loading ? (
-            <div className={style["skeleton-container"]}>
-              {[...Array(20)].map((index) => (
-                <Skeleton key={index} width={300} height={50} />
-              ))}
-            </div>
-          ) : (
-            <>
-              <Form />
-              <ImagesForm />
-            </>
-          )}
+          <Form />
+          <ImagesForm />
 
           <div className={style.buttons}>
             <Button colorScheme="red" onClick={() => navigate("/")}>
@@ -63,11 +43,11 @@ export default function EditProduct() {
             <Button
               colorScheme="blue"
               onClick={() => {
-                editProduct(product)
+                saveProduct(product)
                   .then(() => {
                     toast({
                       title: "Sucesso",
-                      description: "Produto alterado com sucesso",
+                      description: "Produto criado com sucesso",
                       status: "success",
                       duration: 3000,
                       isClosable: true,
@@ -77,7 +57,7 @@ export default function EditProduct() {
                   .catch(() => {
                     toast({
                       title: "Erro",
-                      description: "Não foi possível alterar o produto",
+                      description: "Não foi possível criar o produto",
                       status: "error",
                       duration: 3000,
                       isClosable: true,
