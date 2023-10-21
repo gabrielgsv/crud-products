@@ -1,116 +1,70 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { Input } from "@chakra-ui/input";
-import { useParams } from "react-router-dom";
-import style from "./style.module.css";
-import { ProductType } from "../context/ProductContext";
-import { useEffect, useState } from "react";
-import { GetProductById } from "./service";
-import { Image } from "@chakra-ui/image";
-import { Card, CardBody, CardHeader } from "@chakra-ui/card";
+import { Card } from "@chakra-ui/card";
+import { FormControl } from "@chakra-ui/form-control";
 import { Text } from "@chakra-ui/layout";
-import { priceFormat } from "../../../services/priceFormat";
+import { Button, Skeleton } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Form from "../components/Form";
+import ImagesForm from "../components/ImagesForm";
+import { useProduct } from "../context/ProductContext";
+import { GetProductById } from "./service";
+import style from "../style.module.css";
 
 export default function ViewProduct() {
-  const [product, setProduct] = useState<ProductType>();
+  const { setProduct } = useProduct();
+  const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     GetProductById(Number(id)).then((res) => {
       setProduct(res);
+      setTimeout(() => {
+        setLoading(false);
+      }, 700);
     });
   }, []);
 
   return (
     <>
-      <Text className={style.title}>Visualizar Produto</Text>
-      <FormControl padding="0 100px">
-        <div className={style.container}>
-          <div>
-            <FormLabel>Nome</FormLabel>
-            <Input w={300} type="text" value={product?.title} isReadOnly />
-          </div>
-
-          <div>
-            <FormLabel>Marca</FormLabel>
-            <Input w={300} type="text" value={product?.brand} isReadOnly />
-          </div>
-
-          <div>
-            <FormLabel>Descrição</FormLabel>
-            <Input
-              w={300}
-              type="text"
-              value={product?.description}
-              isReadOnly
-            />
-          </div>
-
-          <div>
-            <FormLabel>Preço</FormLabel>
-            <Input
-              w={300}
-              type="text"
-              value={product?.price && priceFormat(product.price)}
-              isReadOnly
-            />
-          </div>
-
-          <div>
-            <FormLabel>Porcentagem de desconto</FormLabel>
-            <Input w={300} type="text" value={product?.discountPercentage} isReadOnly />
-          </div>
-
-          <div>
-            <FormLabel>Categoria</FormLabel>
-            <Input w={300} type="text" value={product?.category} isReadOnly />
-          </div>
-
-          <div>
-            <FormLabel>Avaliação</FormLabel>
-            <Input w={300} type="text" value={product?.rating} isReadOnly />
-          </div>
-
-          <div>
-            <FormLabel>Estoque</FormLabel>
-            <Input w={300} type="text" value={product?.stock} isReadOnly />
-          </div>
-        </div>
-
-        <div className={style.container} style={{ marginTop: "30px" }}>
-          <Card maxW="auto">
-            <CardHeader>
-              <Text as="b">Imagem principal</Text>
-            </CardHeader>
-            <CardBody display="flex" justifyContent="center">
-              <Image
-                src={product?.thumbnail}
-                alt={product?.title}
-                width={300}
-                height="auto"
-                />
-            </CardBody>
-          </Card>
-
-          <Card maxW="auto">
-            <CardHeader>
-              <Text as="b">Imagens</Text>
-            </CardHeader>
-            <CardBody display="flex" justifyContent="center">
-              {product?.images.map((image) => (
-                <Image
-                  key={image}
-                  src={image}
-                  alt={product?.title}
-                  width={300}
-                  height="auto"
-                />
+      <Card
+        variant="outline"
+        rounded="lg"
+        maxWidth="90vw"
+        minWidth={"500px"}
+        p={6}
+        m="10px auto"
+      >
+        <Text className={style.title}>Visualizar Produto</Text>
+        <FormControl padding="0 100px">
+          {loading ? (
+            <div className={style["skeleton-container"]}>
+              {[...Array(20)].map((index) => (
+                <Skeleton key={index} width={300} height={50} />
               ))}
-            </CardBody>
-          </Card>
-        </div>
-      </FormControl>
+            </div>
+          ) : (
+            <>
+              <Form isReadOnly />
+              <ImagesForm isReadOnly />
+            </>
+          )}
+          <div className={style.buttons}>
+            <Button colorScheme="red" onClick={() => navigate("/")}>
+              Cancelar
+            </Button>
+            <Button
+              colorScheme="blue"
+              onClick={() => navigate(`/edit-product/${id}`)}
+            >
+              Editar
+            </Button>
+          </div>
+        </FormControl>
+      </Card>
     </>
   );
 }

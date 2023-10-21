@@ -3,9 +3,9 @@ import { FormLabel, Input, Select } from "@chakra-ui/react";
 import { ProductType, useProduct } from "../../context/ProductContext";
 import { NumericFormat } from "react-number-format";
 import { GetCategories } from "../../EditProduct/service";
-import style from "./style.module.css"
+import style from "./style.module.css";
 
-export default function Form() {
+export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
   const { product, setProduct } = useProduct();
   const [categories, setCategories] = useState<string[]>();
 
@@ -21,7 +21,10 @@ export default function Form() {
       | React.ChangeEvent<HTMLSelectElement>
   ) {
     e.preventDefault();
-    setProduct((prevProduct) => ({ ...prevProduct, [e.target.name]: e.target.value } as ProductType));
+    setProduct(
+      (prevProduct) =>
+        ({ ...prevProduct, [e.target.name]: e.target.value } as ProductType)
+    );
   }
   return (
     <div className={style.container}>
@@ -33,6 +36,7 @@ export default function Form() {
           type="text"
           name="title"
           value={product?.title}
+          readOnly={isReadOnly}
         />
       </div>
 
@@ -44,6 +48,7 @@ export default function Form() {
           type="text"
           name="brand"
           value={product?.brand}
+          readOnly={isReadOnly}
         />
       </div>
 
@@ -55,6 +60,7 @@ export default function Form() {
           type="text"
           name="description"
           value={product?.description}
+          readOnly={isReadOnly}
         />
       </div>
 
@@ -71,6 +77,7 @@ export default function Form() {
           customInput={Input}
           w={300}
           prefix="R$ "
+          readOnly={isReadOnly}
         />
       </div>
 
@@ -88,6 +95,7 @@ export default function Form() {
           decimalSeparator=","
           thousandSeparator="."
           suffix=" %"
+          readOnly={isReadOnly}
         />
       </div>
 
@@ -99,6 +107,7 @@ export default function Form() {
           value={product?.category}
           w={300}
           onChange={handleChange}
+          isReadOnly={isReadOnly}
         >
           {categories?.map((category) => (
             <option key={category} value={category}>
@@ -116,6 +125,7 @@ export default function Form() {
           value={product?.rating}
           customInput={Input}
           w={300}
+          readOnly={isReadOnly}
         />
       </div>
 
@@ -127,6 +137,7 @@ export default function Form() {
           value={product?.stock}
           customInput={Input}
           w={300}
+          readOnly={isReadOnly}
         />
       </div>
     </div>

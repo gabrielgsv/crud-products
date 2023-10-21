@@ -11,7 +11,7 @@ import emptyImage from "../../../../assets/empty-image.svg";
 import { ProductType, useProduct } from "../../context/ProductContext";
 import style from "./style.module.css";
 
-export default function ImagesForm() {
+export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
   const { product, setProduct } = useProduct();
 
   function handleFileChange(
@@ -31,10 +31,13 @@ export default function ImagesForm() {
               } as ProductType)
           );
         } else {
-          setProduct((prevProduct) => ({
-            ...prevProduct,
-            [e.target.name]: reader.result as string,
-          } as ProductType));
+          setProduct(
+            (prevProduct) =>
+              ({
+                ...prevProduct,
+                [e.target.name]: reader.result as string,
+              } as ProductType)
+          );
         }
       };
       reader.readAsDataURL(file);
@@ -54,17 +57,21 @@ export default function ImagesForm() {
             width={300}
             height="auto"
           />
-          <input
-            type="file"
-            accept="image/*"
-            name="thumbnail"
-            id="thumbnail"
-            onChange={handleFileChange}
-            className={style["input-file"]}
-          />
-          <label htmlFor="thumbnail" className={style["label-file"]}>
-            Troque a imagem
-          </label>
+          {!isReadOnly && (
+            <>
+              <input
+                type="file"
+                accept="image/*"
+                name="thumbnail"
+                id="thumbnail"
+                onChange={handleFileChange}
+                className={style["input-file"]}
+              />
+              <label htmlFor="thumbnail" className={style["label-file"]}>
+                Troque a imagem
+              </label>
+            </>
+          )}
         </CardBody>
       </Card>
 
@@ -82,46 +89,51 @@ export default function ImagesForm() {
                 className={style.images}
                 fallbackSrc={emptyImage}
               />
-              <Button
-                colorScheme="gray"
-                leftIcon={<FiXCircle size={20} />}
-                onClick={() =>
-                  setProduct({
-                    ...product,
-                    images: product.images.filter((item) => item !== image),
-                  })
-                }
-              >
-                Remover
-              </Button>
+              {!isReadOnly && (
+                <Button
+                  colorScheme="gray"
+                  leftIcon={<FiXCircle size={20} />}
+                  onClick={() =>
+                    setProduct({
+                      ...product,
+                      images: product.images.filter((item) => item !== image),
+                    })
+                  }
+                >
+                  Remover
+                </Button>
+              )}
             </div>
           ))}
-          <div
-            className={style["container-images"]}
-            style={{ width: "100%", height: 250 }}
-          >
-            <input
-              type="file"
-              accept="image/*"
-              name="images"
-              id="images"
-              onChange={(e) => handleFileChange(e, true)}
-              className={style["input-file"]}
-            />
-            <label
-              htmlFor="images"
-              className={style["label-file"]}
-              style={{
-                borderRadius: 30,
-                width: 50,
-                height: 50,
-                padding: 10,
-              }}
+
+          {!isReadOnly && (
+            <div
+              className={style["container-images"]}
+              style={{ width: "100%", height: 250 }}
             >
-              <FiPlus size={30} />
-            </label>
-            Adicionar
-          </div>
+              <input
+                type="file"
+                accept="image/*"
+                name="images"
+                id="images"
+                onChange={(e) => handleFileChange(e, true)}
+                className={style["input-file"]}
+              />
+              <label
+                htmlFor="images"
+                className={style["label-file"]}
+                style={{
+                  borderRadius: 30,
+                  width: 50,
+                  height: 50,
+                  padding: 10,
+                }}
+              >
+                <FiPlus size={30} />
+              </label>
+              Adicionar
+            </div>
+          )}
         </CardBody>
       </Card>
     </div>

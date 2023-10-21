@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
 import { useProduct } from "../context/ProductContext";
 import { GetProductById, editProduct } from "./service";
-import style from "./style.module.css";
+import style from "../style.module.css";
 import ImagesForm from "../components/ImagesForm";
 
 export default function EditProduct() {
@@ -55,7 +55,9 @@ export default function EditProduct() {
           )}
 
           <div className={style.buttons}>
-            <Button colorScheme="red" onClick={() => navigate("/")}>Cancelar</Button>
+            <Button colorScheme="red" onClick={() => navigate("/")}>
+              Cancelar
+            </Button>
             <Button
               colorScheme="blue"
               onClick={() => {
@@ -68,7 +70,7 @@ export default function EditProduct() {
                       duration: 3000,
                       isClosable: true,
                     });
-                    navigate("/")
+                    navigate("/");
                   })
                   .catch(() => {
                     toast({
