@@ -8,6 +8,7 @@ import ViewProduct from "./pages/Products/ViewProduct";
 import NavBar from "./components/NavBar";
 import EditProduct from "./pages/Products/EditProduct";
 import ProductProvider from "./pages/Products/context/ProductContext";
+import CreateProduct from "./pages/Products/CreateProduct";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/edit-product/:id",
     element: <EditProduct />,
+  },
+  {
+    path: "/create-product",
+    element: <CreateProduct />,
   },
   {
     path: "*",
