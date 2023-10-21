@@ -16,7 +16,7 @@ export type ProductType = {
 };
 
 type ProductTypeContext = {
-  product: ProductType | null;
+  product: ProductType;
   setProduct: React.Dispatch<React.SetStateAction<ProductType>>;
 };
 
