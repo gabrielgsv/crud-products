@@ -7,6 +7,7 @@ import Products from "./pages/Products";
 import ViewProduct from "./pages/Products/ViewProduct";
 import NavBar from "./components/NavBar";
 import EditProduct from "./pages/Products/EditProduct";
+import ProductProvider from "./pages/Products/context/ProductContext";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider>
       <NavBar />
-      <RouterProvider router={router} />
+      <ProductProvider>
+        <RouterProvider router={router} />
+      </ProductProvider>
     </ChakraProvider>
   </React.StrictMode>
 );
