@@ -32,7 +32,7 @@ export const DEFAULT_VALUE = {
     brand: "",
     category: "",
     thumbnail: "",
-    images: [""],
+    images: [],
   },
   setProduct: () => {},
 };
