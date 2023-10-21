@@ -1,0 +1,38 @@
+.input-file {
+  display: none;
+}
+
+.label-file {
+  background-color: #2b6cb0;
+  width: fit-content;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 6px 20px;
+}
+
+.images {
+  margin: 10px 0;
+  max-height: 200px;
+  align-self: center;
+}
+
+.container-images {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.subcontainer-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-images {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}

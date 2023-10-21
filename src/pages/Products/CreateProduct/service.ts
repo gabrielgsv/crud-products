@@ -1,16 +1,16 @@
 import api from "../../../services/api";
 import { ProductType } from "../context/ProductContext";
 
-export function GetProductById(id: number) {
-  return new Promise<ProductType>((resolve) => {
+export function saveProduct(product: ProductType) {
+  return new Promise((resolve, reject) => {
     api
-      .get(`/products/${id}`)
+      .post(`/products/add`, { ...product, id: undefined })
       .then((res) => {
-        const product: ProductType = res.data;
-        resolve(product);
+        resolve(res);
       })
       .catch((err) => {
         console.error(err);
+        reject();
       });
   });
 }

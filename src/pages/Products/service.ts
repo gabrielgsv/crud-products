@@ -1,22 +1,25 @@
-import axios from "axios";
-import { ProductsType } from "../../types/Products";
+import api from "../../services/api";
+import { ProductType } from "./context/ProductContext";
 
-export const getProducts = new Promise<ProductsType[]>((resolve) => {
-  axios
-    .get("https://dummyjson.com/products")
-    .then((res) => {
-      const products: ProductsType[] = res.data.products;
-      resolve(products);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-});
+export function getAndSearchProducts(search?: string) {
+  return new Promise<ProductType[]>((resolve) => {
+    const url = search ? `/products/search?q=${search}` : "/products";
+    api
+      .get(url)
+      .then((res) => {
+        const products: ProductType[] = res.data.products;
+        resolve(products);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+}
 
 export function deleteProduct(id: number) {
   return new Promise((resolve) => {
-    axios
-      .delete(`https://dummyjson.com/products/${id}`)
+    api
+      .delete(`/products/${id}`)
       .then((res) => {
         resolve(res);
       })
