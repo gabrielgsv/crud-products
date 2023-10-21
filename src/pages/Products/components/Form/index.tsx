@@ -21,7 +21,7 @@ export default function Form() {
       | React.ChangeEvent<HTMLSelectElement>
   ) {
     e.preventDefault();
-    setProduct({ ...product, [e.target.name]: e.target.value } as ProductType);
+    setProduct((prevProduct) => ({ ...prevProduct, [e.target.name]: e.target.value } as ProductType));
   }
   return (
     <div className={style.container}>
