@@ -1,11 +1,11 @@
-import axios from "axios";
-import { ProductsType } from "../../types/Products";
+import api from "../../services/api";
+import { ProductType } from "./context/ProductContext";
 
-export const getProducts = new Promise<ProductsType[]>((resolve) => {
-  axios
-    .get("https://dummyjson.com/products")
+export const getProducts = new Promise<ProductType[]>((resolve) => {
+  api
+    .get("/products")
     .then((res) => {
-      const products: ProductsType[] = res.data.products;
+      const products: ProductType[] = res.data.products;
       resolve(products);
     })
     .catch((err) => {
@@ -15,8 +15,8 @@ export const getProducts = new Promise<ProductsType[]>((resolve) => {
 
 export function deleteProduct(id: number) {
   return new Promise((resolve) => {
-    axios
-      .delete(`https://dummyjson.com/products/${id}`)
+    api
+      .delete(`/products/${id}`)
       .then((res) => {
         resolve(res);
       })

@@ -10,12 +10,12 @@ import {
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useEffect, useState } from "react";
 import packageAnimation from "../../assets/package-animation.json";
-import ActionButtons from "../../components/ActionButtons";
+import ActionButtons from "./components/ActionButtons";
+import { ProductType } from "./context/ProductContext";
 import { getProducts } from "./service";
 import style from "./style.module.css";
-import { ProductsType } from "../../types/Products";
 export default function Products() {
-  const [products, setProducts] = useState<ProductsType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
 
   useEffect(() => {
     getProducts.then((res) => {
@@ -40,7 +40,7 @@ export default function Products() {
                 <Tr key={product.id}>
                   <Td>{product.title}</Td>
                   <Td>
-                    <ActionButtons id={product.id} setProducts={setProducts} />
+                    <ActionButtons id={product.id as number} setProducts={setProducts} />
                   </Td>
                 </Tr>
               ))}

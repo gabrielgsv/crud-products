@@ -2,20 +2,21 @@
 import { Card } from "@chakra-ui/card";
 import { FormControl } from "@chakra-ui/form-control";
 import { Text } from "@chakra-ui/layout";
-import { Button, Skeleton } from "@chakra-ui/react";
+import { Button, Skeleton, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
-import ImagesForm from "../components/ImagesForm";
 import { useProduct } from "../context/ProductContext";
-import { GetProductById } from "./service";
+import { GetProductById, editProduct } from "./service";
 import style from "../style.module.css";
+import ImagesForm from "../components/ImagesForm";
 
-export default function ViewProduct() {
-  const { setProduct } = useProduct();
+export default function EditProduct() {
+  const { product, setProduct } = useProduct();
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
+  const toast = useToast();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function ViewProduct() {
         p={6}
         m="10px auto"
       >
-        <Text className={style.title}>Visualizar Produto</Text>
+        <Text className={style.title}>Editar Produto</Text>
         <FormControl padding="0 100px">
           {loading ? (
             <div className={style["skeleton-container"]}>
@@ -48,19 +49,41 @@ export default function ViewProduct() {
             </div>
           ) : (
             <>
-              <Form isReadOnly />
-              <ImagesForm isReadOnly />
+              <Form />
+              <ImagesForm />
             </>
           )}
+
           <div className={style.buttons}>
             <Button colorScheme="red" onClick={() => navigate("/")}>
               Cancelar
             </Button>
             <Button
               colorScheme="blue"
-              onClick={() => navigate(`/edit-product/${id}`)}
+              onClick={() => {
+                editProduct(product)
+                  .then(() => {
+                    toast({
+                      title: "Sucesso",
+                      description: "Produto alterado com sucesso",
+                      status: "success",
+                      duration: 3000,
+                      isClosable: true,
+                    });
+                    navigate("/");
+                  })
+                  .catch(() => {
+                    toast({
+                      title: "Erro",
+                      description: "Não foi possível alterar o produto",
+                      status: "error",
+                      duration: 3000,
+                      isClosable: true,
+                    });
+                  });
+              }}
             >
-              Editar
+              Salvar
             </Button>
           </div>
         </FormControl>
