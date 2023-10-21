@@ -1,19 +1,19 @@
 import {
   Button,
-  useToast,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
   ModalBody,
+  ModalCloseButton,
+  ModalContent,
   ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { deleteProduct, getProducts } from "../../service";
+import { FiEdit, FiEye, FiXCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { FiEye, FiXCircle, FiEdit } from "react-icons/fi";
 import { ProductType } from "../../context/ProductContext";
+import { deleteProduct, getAndSearchProducts } from "../../service";
 
 type PropsTypes = {
   id: number;
@@ -33,7 +33,7 @@ export default function ActionButtons({ id, setProducts }: PropsTypes) {
         isClosable: true,
       });
 
-      getProducts.then((res) => {
+      getAndSearchProducts().then((res) => {
         setProducts(res);
       });
     });
