@@ -10,10 +10,10 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
-import { deleteProduct, getProducts } from "../../pages/Products/service";
+import { deleteProduct, getProducts } from "../../service";
 import { Link } from "react-router-dom";
 import { FiEye, FiXCircle, FiEdit } from "react-icons/fi";
-import { ProductType } from "../../pages/Products/context/ProductContext";
+import { ProductType } from "../../context/ProductContext";
 
 type PropsTypes = {
   id: number;
