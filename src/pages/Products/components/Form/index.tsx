@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FormLabel, Input, Select } from "@chakra-ui/react";
 import { ProductType, useProduct } from "../../context/ProductContext";
 import { NumericFormat } from "react-number-format";
-import { GetCategories } from "../../EditProduct/service";
+import { GetCategories } from "./service";
 import style from "./style.module.css";
 
 export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
@@ -124,6 +124,10 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           name="rating"
           value={product?.rating}
           customInput={Input}
+          decimalScale={2}
+          fixedDecimalScale
+          decimalSeparator=","
+          maxLength={5}
           w={300}
           readOnly={isReadOnly}
         />
@@ -136,6 +140,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           name="stock"
           value={product?.stock}
           customInput={Input}
+          decimalScale={0}
           w={300}
           readOnly={isReadOnly}
         />
