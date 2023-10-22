@@ -10,6 +10,8 @@ import EditProduct from "./pages/Products/EditProduct";
 import ProductProvider from "./pages/Products/context/ProductContext";
 import CreateProduct from "./pages/Products/CreateProduct";
 
+import "./main.css";
+
 const router = createBrowserRouter([
   {
     path: "/",

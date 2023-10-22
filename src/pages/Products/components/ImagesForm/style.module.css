@@ -33,6 +33,7 @@
 }
 
 .card-images {
+  max-width: 80vw;
   display: grid;
   grid-template-columns: auto auto auto;
 }
