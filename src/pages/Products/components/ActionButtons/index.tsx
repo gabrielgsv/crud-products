@@ -45,17 +45,28 @@ export default function ActionButtons({ id, setProducts }: PropsTypes) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Excluir Produto</ModalHeader>
+          <ModalHeader id="delete-modal-title">Excluir Produto</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <p>Você tem certeza que deseja excluir este produto?</p>
+            <p id="delete-modal-description">
+              Você tem certeza que deseja excluir este produto?
+            </p>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button
+              id="delete-modal-cancel"
+              colorScheme="blue"
+              mr={3}
+              onClick={onClose}
+            >
               Cancelar
             </Button>
-            <Button colorScheme="red" onClick={onClickDelete}>
+            <Button
+              id="delete-modal-confirm"
+              colorScheme="red"
+              onClick={onClickDelete}
+            >
               Excluir
             </Button>
           </ModalFooter>
@@ -68,16 +79,32 @@ export default function ActionButtons({ id, setProducts }: PropsTypes) {
     <>
       <DeleteModal />
       <Link to={`/product/${id}`}>
-        <Button m={2} colorScheme="blue" leftIcon={<FiEye />}>
+        <Button
+          id="view-product-button"
+          m={2}
+          colorScheme="blue"
+          leftIcon={<FiEye />}
+        >
           Ver Dados
         </Button>
       </Link>
       <Link to={`/edit-product/${id}`}>
-        <Button m={2} colorScheme="blue" leftIcon={<FiEdit />}>
+        <Button
+          id="edit-product-button"
+          m={2}
+          colorScheme="blue"
+          leftIcon={<FiEdit />}
+        >
           Alterar
         </Button>
       </Link>
-      <Button m={2} colorScheme="red" onClick={onOpen} leftIcon={<FiXCircle />}>
+      <Button
+        id="delete-product-button"
+        m={2}
+        colorScheme="red"
+        onClick={onOpen}
+        leftIcon={<FiXCircle />}
+      >
         Excluir
       </Button>
     </>

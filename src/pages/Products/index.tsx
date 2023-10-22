@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import packageAnimation from "../../assets/package-animation.json";
-import { useDebounce } from "../../hooks/UseDebounce";
+import { useDebounce } from "../../hooks/useDebounce";
 import ActionButtons from "./components/ActionButtons";
 import {
   DEFAULT_VALUE,
@@ -63,12 +63,14 @@ export default function Products() {
           >
             <Input
               placeholder="Pesquisar"
+              id="search-input"
               width={300}
               mb={5}
               onChange={handleChangeSearch}
             />
             <Link to="/create-product" style={{ alignSelf: "flex-end" }}>
               <Button
+                id="create-product-button"
                 colorScheme="blue"
                 variant="outline"
                 leftIcon={<FiPlus />}
@@ -77,7 +79,7 @@ export default function Products() {
               </Button>
             </Link>
             <br />
-            <Table size="sm">
+            <Table size="sm" id="products-table">
               <Thead>
                 <Tr>
                   <Th>Nome</Th>
@@ -88,11 +90,15 @@ export default function Products() {
                 {products.map((product) => (
                   <Tr key={product.id}>
                     <Td>
-                      <div className={style["product-text"]}>
+                      <div
+                        id="product-title"
+                        data-cy="product-title"
+                        className={style["product-text"]}
+                      >
                         {product.title}
                       </div>
                     </Td>
-                    <Td>
+                    <Td id="product-actions">
                       <ActionButtons
                         id={product.id as number}
                         setProducts={setProducts}

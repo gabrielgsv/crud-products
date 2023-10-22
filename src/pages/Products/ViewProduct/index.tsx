@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
 import ImagesForm from "../components/ImagesForm";
 import { useProduct } from "../context/ProductContext";
-import { GetProductById } from "./service";
+import { GetProductById } from "../service";
 import style from "../style.module.css";
 
 export default function ViewProduct() {
@@ -38,10 +38,12 @@ export default function ViewProduct() {
         p={6}
         m="10px auto"
       >
-        <Text className={style.title}>Visualizar Produto</Text>
+        <Text id="title" className={style.title}>
+          Visualizar Produto
+        </Text>
         <FormControl padding="0 100px">
           {loading ? (
-            <div className={style["skeleton-container"]}>
+            <div id="skeleton-loading" className={style["skeleton-container"]}>
               {[...Array(20)].map((index) => (
                 <Skeleton key={index} width={300} height={50} />
               ))}
@@ -53,10 +55,15 @@ export default function ViewProduct() {
             </>
           )}
           <div className={style.buttons}>
-            <Button colorScheme="red" onClick={() => navigate("/")}>
+            <Button
+              id="cancel-button"
+              colorScheme="red"
+              onClick={() => navigate("/")}
+            >
               Cancelar
             </Button>
             <Button
+              id="edit-button"
               colorScheme="blue"
               onClick={() => navigate(`/edit-product/${id}`)}
             >

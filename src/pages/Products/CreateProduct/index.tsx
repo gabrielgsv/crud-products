@@ -31,16 +31,23 @@ export default function CreateProduct() {
         p={6}
         m="10px auto"
       >
-        <Text className={style.title}>Editar Produto</Text>
+        <Text id="title" className={style.title}>
+          Criar Produto
+        </Text>
         <FormControl padding="0 100px">
           <Form />
           <ImagesForm />
 
           <div className={style.buttons}>
-            <Button colorScheme="red" onClick={() => navigate("/")}>
+            <Button
+              id="cancel-button"
+              colorScheme="red"
+              onClick={() => navigate("/")}
+            >
               Cancelar
             </Button>
             <Button
+              id="save-button"
               colorScheme="blue"
               onClick={() => {
                 saveProduct(product)

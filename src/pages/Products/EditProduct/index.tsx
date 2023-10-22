@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
 import { DEFAULT_VALUE, useProduct } from "../context/ProductContext";
-import { GetProductById, editProduct } from "./service";
+import { editProduct } from "./service";
+import { GetProductById } from "../service";
 import style from "../style.module.css";
 import ImagesForm from "../components/ImagesForm";
 
@@ -44,7 +45,7 @@ export default function EditProduct() {
         <Text className={style.title}>Editar Produto</Text>
         <FormControl padding="0 100px">
           {loading ? (
-            <div className={style["skeleton-container"]}>
+            <div id="skeleton-loading" className={style["skeleton-container"]}>
               {[...Array(20)].map((index) => (
                 <Skeleton key={index} width={300} height={50} />
               ))}
@@ -57,10 +58,15 @@ export default function EditProduct() {
           )}
 
           <div className={style.buttons}>
-            <Button colorScheme="red" onClick={() => navigate("/")}>
+            <Button
+              id="cancel-button"
+              colorScheme="red"
+              onClick={() => navigate("/")}
+            >
               Cancelar
             </Button>
             <Button
+              id="save-button"
               colorScheme="blue"
               onClick={() => {
                 editProduct(product)

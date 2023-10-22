@@ -16,6 +16,20 @@ export function getAndSearchProducts(search?: string) {
   });
 }
 
+export function GetProductById(id: number) {
+  return new Promise<ProductType>((resolve) => {
+    api
+      .get(`/products/${id}`)
+      .then((res) => {
+        const product: ProductType = res.data;
+        resolve(product);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+}
+
 export function deleteProduct(id: number) {
   return new Promise((resolve) => {
     api
