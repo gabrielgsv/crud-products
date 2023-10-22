@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
+  Box,
   Button,
   Card,
   Input,
+  Skeleton,
   Table,
   TableContainer,
   Tbody,
@@ -10,6 +12,7 @@ import {
   Th,
   Thead,
   Tr,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useEffect, useState } from "react";
@@ -48,14 +51,17 @@ export default function Products() {
 
   return (
     <>
-      <div className={style.container}>
+      <Box
+        bg={useColorModeValue("blackAlpha.50", "gray.900")}
+        py={50}
+        className={style.container}
+      >
         <Player autoplay src={packageAnimation} keepLastFrame speed={0.5} />
-        <TableContainer mt={10}>
+        <TableContainer mt={5}>
           <Card
             variant="outline"
             rounded="lg"
-            maxWidth="90vw"
-            minWidth={"500px"}
+            w={700}
             p={10}
             display="flex"
             flexDir="column"
@@ -79,7 +85,7 @@ export default function Products() {
               </Button>
             </Link>
             <br />
-            <Table size="sm" id="products-table">
+            <Table className={style.table} size="sm" id="products-table">
               <Thead>
                 <Tr>
                   <Th>Nome</Th>
@@ -87,30 +93,45 @@ export default function Products() {
                 </Tr>
               </Thead>
               <Tbody>
-                {products.map((product) => (
-                  <Tr key={product.id}>
+                {products.length > 0 ? (
+                  products.map((product) => (
+                    <Tr key={product.id}>
+                      <Td>
+                        <div
+                          id="product-title"
+                          data-cy="product-title"
+                          className={style["product-text"]}
+                        >
+                          {product.title}
+                        </div>
+                      </Td>
+                      <Td id="product-actions">
+                        <ActionButtons
+                          id={product.id as number}
+                          setProducts={setProducts}
+                        />
+                      </Td>
+                    </Tr>
+                  ))
+                ) : (
+                  <Tr>
                     <Td>
-                      <div
-                        id="product-title"
-                        data-cy="product-title"
-                        className={style["product-text"]}
-                      >
-                        {product.title}
-                      </div>
+                      <Skeleton m={5} w={200} h={30} />
+                      <Skeleton m={5} w={200} h={30} />
+                      <Skeleton m={5} w={200} h={30} />
                     </Td>
-                    <Td id="product-actions">
-                      <ActionButtons
-                        id={product.id as number}
-                        setProducts={setProducts}
-                      />
+                    <Td>
+                      <Skeleton m={5} w={200} h={30} />
+                      <Skeleton m={5} w={200} h={30} />
+                      <Skeleton m={5} w={200} h={30} />
                     </Td>
                   </Tr>
-                ))}
+                )}
               </Tbody>
             </Table>
           </Card>
         </TableContainer>
-      </div>
+      </Box>
     </>
   );
 }
