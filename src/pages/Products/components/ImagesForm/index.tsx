@@ -63,7 +63,7 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
                 onChange={handleFileChange}
                 className={style["input-file"]}
               />
-              <label htmlFor="thumbnail" className={style["label-file"]}>
+              <label htmlFor="thumbnail-input" className={style["label-file"]}>
                 Troque a imagem
               </label>
             </>
@@ -118,7 +118,7 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
                 className={style["input-file"]}
               />
               <label
-                htmlFor="images"
+                htmlFor="add-image-input"
                 className={style["label-file"]}
                 style={{
                   borderRadius: 30,
