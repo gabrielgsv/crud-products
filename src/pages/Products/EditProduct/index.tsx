@@ -40,16 +40,9 @@ export default function EditProduct() {
 
   return (
     <Box bg={useColorModeValue("blackAlpha.50", "gray.900")}>
-      <Card
-        variant="outline"
-        rounded="lg"
-        maxWidth="90vw"
-        minWidth={"500px"}
-        p={6}
-        m="0 auto"
-      >
+      <Card variant="outline" rounded="lg" maxWidth="90vw" p={6} m="0 auto">
         <Text className={style.title}>Editar Produto</Text>
-        <FormControl padding="0 100px">
+        <FormControl className={style.form}>
           {loading ? (
             <div id="skeleton-loading" className={style["skeleton-container"]}>
               {[...Array(20)].map((item, index) => (

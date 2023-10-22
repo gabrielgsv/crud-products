@@ -40,7 +40,7 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
   }
   return (
     <div style={{ marginTop: "30px" }}>
-      <Card variant="filled" maxW={500} mb={5}>
+      <Card variant="filled" mb={5} width={300}>
         <CardHeader>
           <Text as="b">Imagem principal</Text>
         </CardHeader>
@@ -71,7 +71,7 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
         </CardBody>
       </Card>
 
-      <Card maxW="auto" variant="elevated">
+      <Card w={"80vw"} variant="elevated">
         <CardHeader>
           <Text as="b">Imagens adicionais</Text>
         </CardHeader>
