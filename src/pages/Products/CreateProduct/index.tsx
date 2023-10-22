@@ -2,7 +2,7 @@
 import { Card } from "@chakra-ui/card";
 import { FormControl } from "@chakra-ui/form-control";
 import { Text } from "@chakra-ui/layout";
-import { Button, useToast } from "@chakra-ui/react";
+import { Button, useColorModeValue, useToast, Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Form from "../components/Form";
 import ImagesForm from "../components/ImagesForm";
@@ -22,14 +22,14 @@ export default function CreateProduct() {
   }, []);
 
   return (
-    <>
+    <Box bg={useColorModeValue("blackAlpha.50", "gray.900")}>
       <Card
         variant="outline"
         rounded="lg"
         maxWidth="90vw"
         minWidth={"500px"}
         p={6}
-        m="10px auto"
+        m="0 auto"
       >
         <Text id="title" className={style.title}>
           Criar Produto
@@ -77,6 +77,6 @@ export default function CreateProduct() {
           </div>
         </FormControl>
       </Card>
-    </>
+    </Box>
   );
 }
