@@ -2,7 +2,13 @@
 import { Card } from "@chakra-ui/card";
 import { FormControl } from "@chakra-ui/form-control";
 import { Text } from "@chakra-ui/layout";
-import { Button, Skeleton, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Skeleton,
+  useColorModeValue,
+  useToast,
+  Box,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
@@ -33,21 +39,21 @@ export default function EditProduct() {
   }, []);
 
   return (
-    <>
+    <Box bg={useColorModeValue("blackAlpha.50", "gray.900")}>
       <Card
         variant="outline"
         rounded="lg"
         maxWidth="90vw"
         minWidth={"500px"}
         p={6}
-        m="10px auto"
+        m="0 auto"
       >
         <Text className={style.title}>Editar Produto</Text>
         <FormControl padding="0 100px">
           {loading ? (
             <div id="skeleton-loading" className={style["skeleton-container"]}>
-              {[...Array(20)].map((index) => (
-                <Skeleton key={index} width={300} height={50} />
+              {[...Array(20)].map((item, index) => (
+                <Skeleton id={item} key={index} width={300} height={10} />
               ))}
             </div>
           ) : (
@@ -96,6 +102,6 @@ export default function EditProduct() {
           </div>
         </FormControl>
       </Card>
-    </>
+    </Box>
   );
 }
