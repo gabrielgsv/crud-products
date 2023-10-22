@@ -10,6 +10,7 @@ import { DEFAULT_VALUE, useProduct } from "../context/ProductContext";
 import style from "../style.module.css";
 import { saveProduct } from "./service";
 import { useEffect } from "react";
+import { hasEmptyOrNullString } from "../service";
 
 export default function CreateProduct() {
   const { product, setProduct } = useProduct();
@@ -43,26 +44,37 @@ export default function CreateProduct() {
               id="save-button"
               colorScheme="blue"
               onClick={() => {
-                saveProduct(product)
-                  .then(() => {
-                    toast({
-                      title: "Sucesso",
-                      description: "Produto criado com sucesso",
-                      status: "success",
-                      duration: 3000,
-                      isClosable: true,
-                    });
-                    navigate("/");
-                  })
-                  .catch(() => {
-                    toast({
-                      title: "Erro",
-                      description: "Não foi possível criar o produto",
-                      status: "error",
-                      duration: 3000,
-                      isClosable: true,
-                    });
+                if (hasEmptyOrNullString(product)) {
+                  toast({
+                    title: "Erro",
+                    description: "Preencha todos os campos",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
                   });
+                  return;
+                } else {
+                  saveProduct(product)
+                    .then(() => {
+                      toast({
+                        title: "Sucesso",
+                        description: "Produto criado com sucesso",
+                        status: "success",
+                        duration: 3000,
+                        isClosable: true,
+                      });
+                      navigate("/");
+                    })
+                    .catch(() => {
+                      toast({
+                        title: "Erro",
+                        description: "Não foi possível criar o produto",
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                      });
+                    });
+                }
               }}
             >
               Salvar

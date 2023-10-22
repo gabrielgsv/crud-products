@@ -38,6 +38,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           name="title"
           value={product?.title}
           readOnly={isReadOnly}
+          required
         />
       </div>
 
@@ -51,6 +52,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           name="brand"
           value={product?.brand}
           readOnly={isReadOnly}
+          required
         />
       </div>
 
@@ -64,6 +66,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           name="description"
           value={product?.description}
           readOnly={isReadOnly}
+          required
         />
       </div>
 
@@ -82,6 +85,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           w={300}
           prefix="R$ "
           readOnly={isReadOnly}
+          required
         />
       </div>
 
@@ -101,6 +105,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           thousandSeparator="."
           suffix=" %"
           readOnly={isReadOnly}
+          required
         />
       </div>
 
@@ -137,6 +142,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           maxLength={5}
           w={300}
           readOnly={isReadOnly}
+          required
         />
       </div>
 
@@ -151,6 +157,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
           decimalScale={0}
           w={300}
           readOnly={isReadOnly}
+          required
         />
       </div>
     </div>

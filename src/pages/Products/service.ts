@@ -42,3 +42,9 @@ export function deleteProduct(id: number) {
       });
   });
 }
+
+export function hasEmptyOrNullString(object: ProductType) {
+  return Object.entries(object).some(([key, value]) => {
+    return key !== "id" && (value === "" || value === null);
+  });
+}
