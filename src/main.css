@@ -3,6 +3,6 @@
   src: url("public/Roboto-Regular.ttf") format("ttf");
 }
 
-body {
+:root {
   font-family: "Roboto", sans-serif;
 }
