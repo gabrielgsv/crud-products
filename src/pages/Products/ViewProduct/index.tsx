@@ -2,13 +2,13 @@
 import { Card } from "@chakra-ui/card";
 import { FormControl } from "@chakra-ui/form-control";
 import { Text } from "@chakra-ui/layout";
-import { Button, Skeleton } from "@chakra-ui/react";
+import { Button, Skeleton, useColorModeValue, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
 import ImagesForm from "../components/ImagesForm";
 import { useProduct } from "../context/ProductContext";
-import { GetProductById } from "./service";
+import { GetProductById } from "../service";
 import style from "../style.module.css";
 
 export default function ViewProduct() {
@@ -29,21 +29,23 @@ export default function ViewProduct() {
   }, []);
 
   return (
-    <>
+    <Box bg={useColorModeValue("blackAlpha.50", "gray.900")}>
       <Card
         variant="outline"
         rounded="lg"
         maxWidth="90vw"
         minWidth={"500px"}
         p={6}
-        m="10px auto"
+        m="0 auto"
       >
-        <Text className={style.title}>Visualizar Produto</Text>
+        <Text id="title" className={style.title}>
+          Visualizar Produto
+        </Text>
         <FormControl padding="0 100px">
           {loading ? (
-            <div className={style["skeleton-container"]}>
-              {[...Array(20)].map((index) => (
-                <Skeleton key={index} width={300} height={50} />
+            <div id="skeleton-loading" className={style["skeleton-container"]}>
+              {[...Array(20)].map((item, index) => (
+                <Skeleton id={item} key={index} width={300} height={10} />
               ))}
             </div>
           ) : (
@@ -53,10 +55,15 @@ export default function ViewProduct() {
             </>
           )}
           <div className={style.buttons}>
-            <Button colorScheme="red" onClick={() => navigate("/")}>
+            <Button
+              id="cancel-button"
+              colorScheme="red"
+              onClick={() => navigate("/")}
+            >
               Cancelar
             </Button>
             <Button
+              id="edit-button"
               colorScheme="blue"
               onClick={() => navigate(`/edit-product/${id}`)}
             >
@@ -65,6 +72,6 @@ export default function ViewProduct() {
           </div>
         </FormControl>
       </Card>
-    </>
+    </Box>
   );
 }

@@ -46,6 +46,7 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
         </CardHeader>
         <CardBody display="flex" flexDirection="column" alignItems="center">
           <Image
+            id="thumbnail"
             src={product?.thumbnail}
             alt={product?.title}
             fallbackSrc={emptyImage}
@@ -55,14 +56,14 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
           {!isReadOnly && (
             <>
               <input
+                id="thumbnail-input"
                 type="file"
                 accept="image/*"
                 name="thumbnail"
-                id="thumbnail"
                 onChange={handleFileChange}
                 className={style["input-file"]}
               />
-              <label htmlFor="thumbnail" className={style["label-file"]}>
+              <label htmlFor="thumbnail-input" className={style["label-file"]}>
                 Troque a imagem
               </label>
             </>
@@ -75,9 +76,10 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
           <Text as="b">Imagens adicionais</Text>
         </CardHeader>
         <CardBody className={style["card-images"]}>
-          {product?.images.map((image) => (
-            <div className={style["container-images"]}>
+          {product?.images.map((image, index) => (
+            <div key={index} className={style["container-images"]}>
               <Image
+                id={`image-${index}`}
                 key={image}
                 src={image}
                 alt={product?.title}
@@ -86,6 +88,7 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
               />
               {!isReadOnly && (
                 <Button
+                  id={`remove-image-${index}`}
                   colorScheme="gray"
                   leftIcon={<FiXCircle size={20} />}
                   onClick={() =>
@@ -107,15 +110,15 @@ export default function ImagesForm({ isReadOnly }: { isReadOnly?: boolean }) {
               style={{ width: "100%", height: 250 }}
             >
               <input
+                id="add-image-input"
                 type="file"
                 accept="image/*"
                 name="images"
-                id="images"
                 onChange={(e) => handleFileChange(e, true)}
                 className={style["input-file"]}
               />
               <label
-                htmlFor="images"
+                htmlFor="add-image-input"
                 className={style["label-file"]}
                 style={{
                   borderRadius: 30,

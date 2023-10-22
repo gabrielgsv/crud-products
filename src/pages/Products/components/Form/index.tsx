@@ -31,6 +31,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Nome</FormLabel>
         <Input
+          id="title-input"
           onChange={handleChange}
           w={300}
           type="text"
@@ -43,6 +44,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Marca</FormLabel>
         <Input
+          id="brand-input"
           onChange={handleChange}
           w={300}
           type="text"
@@ -55,6 +57,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Descrição</FormLabel>
         <Input
+          id="description-input"
           onChange={handleChange}
           w={300}
           type="text"
@@ -67,6 +70,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Preço</FormLabel>
         <NumericFormat
+          id="price-input"
           onChange={handleChange}
           value={product?.price}
           name="price"
@@ -84,6 +88,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Porcentagem de desconto</FormLabel>
         <NumericFormat
+          id="discount-percentage-input"
           onChange={handleChange}
           type="text"
           name="discountPercentage"
@@ -102,6 +107,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Categoria</FormLabel>
         <Select
+          id="category-input"
           name="category"
           placeholder="Selecione uma categoria"
           value={product?.category}
@@ -120,6 +126,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Avaliação</FormLabel>
         <NumericFormat
+          id="rating-input"
           onChange={handleChange}
           name="rating"
           value={product?.rating}
@@ -136,6 +143,7 @@ export default function Form({ isReadOnly }: { isReadOnly?: boolean }) {
       <div>
         <FormLabel>Estoque</FormLabel>
         <NumericFormat
+          id="stock-input"
           onChange={handleChange}
           name="stock"
           value={product?.stock}
