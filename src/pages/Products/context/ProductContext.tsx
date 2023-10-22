@@ -2,7 +2,7 @@
 import React, { createContext, useState, useContext } from "react";
 
 export type ProductType = {
-  id: number | null;
+  id?: number | null;
   title: string;
   description: string;
   price: number | null | string;

@@ -14,7 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form";
 import { DEFAULT_VALUE, useProduct } from "../context/ProductContext";
 import { editProduct } from "./service";
-import { GetProductById } from "../service";
+import { GetProductById, hasEmptyOrNullString } from "../service";
 import style from "../style.module.css";
 import ImagesForm from "../components/ImagesForm";
 
@@ -68,26 +68,37 @@ export default function EditProduct() {
               id="save-button"
               colorScheme="blue"
               onClick={() => {
-                editProduct(product)
-                  .then(() => {
-                    toast({
-                      title: "Sucesso",
-                      description: "Produto alterado com sucesso",
-                      status: "success",
-                      duration: 3000,
-                      isClosable: true,
-                    });
-                    navigate("/");
-                  })
-                  .catch(() => {
-                    toast({
-                      title: "Erro",
-                      description: "Não foi possível alterar o produto",
-                      status: "error",
-                      duration: 3000,
-                      isClosable: true,
-                    });
+                if (hasEmptyOrNullString(product)) {
+                  toast({
+                    title: "Erro",
+                    description: "Preencha todos os campos",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
                   });
+                  return;
+                } else {
+                  editProduct(product)
+                    .then(() => {
+                      toast({
+                        title: "Sucesso",
+                        description: "Produto alterado com sucesso",
+                        status: "success",
+                        duration: 3000,
+                        isClosable: true,
+                      });
+                      navigate("/");
+                    })
+                    .catch(() => {
+                      toast({
+                        title: "Erro",
+                        description: "Não foi possível alterar o produto",
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                      });
+                    });
+                }
               }}
             >
               Salvar
